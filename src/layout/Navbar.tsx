@@ -1,20 +1,25 @@
 import { useState } from "react";
 import Tab from "../components/Tab";
 
-export default function NavBar() {
-    const [tabState, setTabState] = useState("Track");
+interface Props {
+    setTabState: any;
+    tabState: string;
+}
 
-    const switchTab = (tab: any) => {
+export default function NavBar({setTabState, tabState}: Props) {
+    const switchTab = (tab: string) => {
         setTabState(tab)
     }
 
     return (
-        <header className="h-8">
-            <div className="flex flex-row gap-1 m-1 h-full">
-                <Tab tabName="Track" onTabClick={() => switchTab("Track")} tabState={tabState}></Tab>
-                <Tab tabName="Overview" onTabClick={() => switchTab("Overview")} tabState={tabState}></Tab>
-            </div>
+        <>
+            <header className="h-8 m-1">
+                <div className="flex flex-row gap-1 h-full">
+                    <Tab tabName="Track" onTabClick={() => switchTab("Track")} tabState={tabState}></Tab>
+                    <Tab tabName="Overview" onTabClick={() => switchTab("Overview")} tabState={tabState}></Tab>
+                </div>
+            </header>
             <hr className="border-black"/>
-        </header>
+        </>
     )
 }
