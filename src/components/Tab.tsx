@@ -24,16 +24,16 @@ export default function Tab({tabName, onTabClick, tabState}: Props) {
 
     if (tabName === tabState) {
         return (
-            <button className="bg-gray-200 h-full py-1 px-2 font-serif rounded-md flex flex-row items-center gap-1" onClick={onTabClick}>
+            <button className="bg-gray-200 h-full py-1 px-2 font-serif rounded-md flex flex-row items-center gap-1.5" onClick={onTabClick}>
                 {icon()}
-                <p>{tabName}</p>
+                <p className="mt-0.5">{tabName}</p>
             </button>
         )
     } else {
         return (
-            <button className="h-full py-1 px-2 font-serif rounded-md flex flex-row items-center gap-1" onClick={onTabClick}>
+            <button className="h-full py-1 px-2 font-serif rounded-md flex flex-row items-center gap-1.5" onClick={onTabClick}>
                 {icon()}
-                <p>{tabName}</p>
+                <p className="mt-0.5">{tabName}</p>
             </button>
         )
     }
