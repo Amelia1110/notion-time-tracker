@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/notion-time-tracker/static/css/main.930f5347.css",
+    "main.js": "/notion-time-tracker/static/js/main.39e8855c.js",
+    "static/js/787.28cb0dcd.chunk.js": "/notion-time-tracker/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/notion-time-tracker/index.html",
+    "main.930f5347.css.map": "/notion-time-tracker/static/css/main.930f5347.css.map",
+    "main.39e8855c.js.map": "/notion-time-tracker/static/js/main.39e8855c.js.map",
+    "787.28cb0dcd.chunk.js.map": "/notion-time-tracker/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.930f5347.css",
+    "static/js/main.39e8855c.js"
+  ]
+}
