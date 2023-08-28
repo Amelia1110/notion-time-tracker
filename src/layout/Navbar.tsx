@@ -19,7 +19,7 @@ export default function NavBar({setTabState, tabState}: Props) {
                     <Tab tabName="Overview" onTabClick={() => switchTab("Overview")} tabState={tabState}></Tab>
                 </div>
             </header>
-            <hr/>
+            <hr className="border-black"/>
         </>
     )
 }
