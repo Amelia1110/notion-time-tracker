@@ -35,23 +35,21 @@ export default function TrackPage() {
     };
 
     const pauseStopwatch = () => {
-        toggleStopwatch(false);
-
         if (!pauseOn) {
+            toggleStopwatch(false);
+            setPauseOn(true);
             setPauseStart(new Date());
-        }
 
-        if (timerRef.current !== null) {
-            clearInterval(timerRef.current);
-            timerRef.current = null;
+            if (timerRef.current !== null) {
+                clearInterval(timerRef.current);
+                timerRef.current = null;
+            }
         }
     };
 
     // Start recording time once startTime changes
     useEffect(() => {
         if (startTime && stopwatchOn) {
-            console.log(startTime?.toString());
-
             timerRef.current = window.setInterval(() => {
                 setTime(findDiff());
             }, 1000);
@@ -59,14 +57,10 @@ export default function TrackPage() {
 
         function findDiff(): Date {
             const currentTime = new Date();
-            console.log(currentTime.toString());
-            console.log(timePaused);
-    
-            const hourDiff = startTime ? currentTime.getHours() - startTime?.getHours() : undefined;
-            const minDiff = startTime ? currentTime.getMinutes() - startTime?.getMinutes() : undefined;
-            const secDiff = startTime ? currentTime.getSeconds() - startTime?.getSeconds() - (Math.floor(timePaused / 1000)): undefined;
-            
-            return new Date(2023, 0, 0, hourDiff, minDiff, secDiff);
+
+            const secDiff = startTime ? (currentTime.getTime() - startTime?.getTime()) / 1000 - (timePaused / 1000): undefined;
+
+            return new Date(2023, 0, 0, 0, 0, secDiff);
         }
 
     }, [startTime, stopwatchOn, timePaused]);
