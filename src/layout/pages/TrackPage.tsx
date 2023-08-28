@@ -40,13 +40,23 @@ export default function TrackPage() {
     };
     
     const formatTime = (totalSeconds: number): string => {
-        const minutes = Math.floor(totalSeconds / 60);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
-        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-      };
+      
+        const formattedHours = hours < 10 ? `0${hours}` : hours.toString();
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes.toString();
+        const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds.toString();
+      
+        if (hours > 0) {
+          return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        } else {
+          return `${formattedMinutes}:${formattedSeconds}`;
+        }
+    };
 
     return (
-        <div className="bg-red-100 h-[calc(100vh_-_41px)] grid place-content-center">
+        <div className="h-[calc(100vh_-_42px)] grid place-content-center">
             <h1 className="text-8xl">{formatTime(time)}</h1>
             <div className="flex justify-center gap-5 items-center">
                 <PauseOutlined className="text-xl" onClick={() => stopStopwatch("Pause")}/>
