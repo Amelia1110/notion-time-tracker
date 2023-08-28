@@ -1,10 +1,14 @@
 import { CheckCircleFilled, DeleteOutlined, PauseOutlined, PlayCircleFilled} from "@ant-design/icons";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function TrackPage() {
     const [stopwatchOn, toggleStopwatch] = useState(false);
-    const [time, setTime] = useState(0);
-    const timerRef = useRef<number | null>(null);
+    const [startTime, setStartTime] = useState<Date>(new Date(2023, 0, 0, 0, 0, 0));
+    const [time, setTime] = useState<Date>(new Date(2023, 0, 0, 0, 0, 0));
+    const [pauseStart, setPauseStart] = useState<Date>(new Date(2023, 0, 0, 0, 0, 0));
+    const [timePaused, setTimePaused] = useState(0);
+    const [pauseOn, setPauseOn] = useState(false);
+    const timerRef = useRef<any | null>(null);
 
     const renderPlayPause = () => {
         if (stopwatchOn) {
@@ -20,10 +24,52 @@ export default function TrackPage() {
 
     const startStopwatch = () => {
         toggleStopwatch(true);
-        timerRef.current = window.setInterval(() => {
-        setTime(prevTime => prevTime + 1); // Increment time by 1 second
-        }, 1000);
+
+        if (startTime.getTime() === time.getTime()) {
+            setStartTime(new Date());
+        } else {
+            setPauseOn(false);
+            const currentTime = new Date();
+            setTimePaused(timePaused + currentTime.getTime() - pauseStart.getTime());
+        }
     };
+
+    const pauseStopwatch = () => {
+        toggleStopwatch(false);
+
+        if (!pauseOn) {
+            setPauseStart(new Date());
+        }
+
+        if (timerRef.current !== null) {
+            clearInterval(timerRef.current);
+            timerRef.current = null;
+        }
+    };
+
+    // Start recording time once startTime changes
+    useEffect(() => {
+        if (startTime && stopwatchOn) {
+            console.log(startTime?.toString());
+
+            timerRef.current = window.setInterval(() => {
+                setTime(findDiff());
+            }, 1000);
+        }
+
+        function findDiff(): Date {
+            const currentTime = new Date();
+            console.log(currentTime.toString());
+            console.log(timePaused);
+    
+            const hourDiff = startTime ? currentTime.getHours() - startTime?.getHours() : undefined;
+            const minDiff = startTime ? currentTime.getMinutes() - startTime?.getMinutes() : undefined;
+            const secDiff = startTime ? currentTime.getSeconds() - startTime?.getSeconds() - (Math.floor(timePaused / 1000)): undefined;
+            
+            return new Date(2023, 0, 0, hourDiff, minDiff, secDiff);
+        }
+
+    }, [startTime, stopwatchOn, timePaused]);
 
     const stopStopwatch = (command: string) => {
         if (command === "Save") {
@@ -31,7 +77,10 @@ export default function TrackPage() {
         }
 
         toggleStopwatch(false);
-        if (command !== "Pause") setTime(0);
+
+        setStartTime(new Date(2023, 0, 0, 0, 0, 0))
+        setTime(new Date(2023, 0, 0, 0, 0, 0));
+        setTimePaused(0);
         
         if (timerRef.current !== null) {
           clearInterval(timerRef.current);
@@ -39,27 +88,27 @@ export default function TrackPage() {
         }
     };
     
-    const formatTime = (totalSeconds: number): string => {
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
+    const formatTime = () => {
+        const hours = time?.getHours();
+        const minutes = time?.getMinutes();
+        const seconds = time?.getSeconds();
       
         const formattedHours = hours < 10 ? `0${hours}` : hours.toString();
         const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes.toString();
         const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds.toString();
       
-        if (hours > 0) {
-          return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        if (hours ? hours > 0 : false) {
+          return <h1 className="text-8xl">{`${formattedHours}:${formattedMinutes}:${formattedSeconds}`}</h1>
         } else {
-          return `${formattedMinutes}:${formattedSeconds}`;
+          return <h1 className="text-8xl">{`${formattedMinutes}:${formattedSeconds}`}</h1>
         }
     };
 
     return (
         <div className="h-[calc(100vh_-_42px)] grid place-content-center">
-            <h1 className="text-8xl">{formatTime(time)}</h1>
+            {formatTime()}
             <div className="flex justify-center gap-5 items-center">
-                <PauseOutlined className="text-xl" onClick={() => stopStopwatch("Pause")}/>
+                <PauseOutlined className="text-xl" onClick={pauseStopwatch}/>
                 {renderPlayPause()}
                 <DeleteOutlined className="text-xl" onClick={() => stopStopwatch("Delete")}/>
             </div>
