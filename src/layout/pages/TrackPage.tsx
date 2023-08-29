@@ -34,6 +34,23 @@ export default function TrackPage() {
         }
     };
 
+    const stopStopwatch = (command: string) => {
+        if (command === "Save") {
+            // add something to save to database
+        }
+
+        toggleStopwatch(false);
+
+        setStartTime(new Date(2023, 0, 0, 0, 0, 0))
+        setTime(new Date(2023, 0, 0, 0, 0, 0));
+        setTimePaused(0);
+        
+        if (timerRef.current !== null) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
+    };
+
     const pauseStopwatch = () => {
         if (!pauseOn) {
             toggleStopwatch(false);
@@ -64,23 +81,6 @@ export default function TrackPage() {
         }
 
     }, [startTime, stopwatchOn, timePaused]);
-
-    const stopStopwatch = (command: string) => {
-        if (command === "Save") {
-            // add something to save to database
-        }
-
-        toggleStopwatch(false);
-
-        setStartTime(new Date(2023, 0, 0, 0, 0, 0))
-        setTime(new Date(2023, 0, 0, 0, 0, 0));
-        setTimePaused(0);
-        
-        if (timerRef.current !== null) {
-          clearInterval(timerRef.current);
-          timerRef.current = null;
-        }
-    };
     
     const formatTime = () => {
         const hours = time?.getHours();

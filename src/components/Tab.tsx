@@ -3,7 +3,7 @@ import { CalendarOutlined } from '@ant-design/icons';
 
 interface Props {
     tabName: string;
-    onTabClick: any;
+    onTabClick: () => void;
     tabState: string;
 }
 
