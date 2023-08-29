@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './App.css';
 import Navbar from './layout/Navbar';
 import TrackPage from './layout/pages/TrackPage';
 import OverviewPage from './layout/pages/OverviewPage';
+import HistoryPage from './layout/pages/HistoryPage';
 
 function App() {
   const [tabState, setTabState] = useState("Track");
@@ -16,6 +16,11 @@ function App() {
       if (tabState === "Overview") {
         return (
           <OverviewPage/>
+        )
+      }
+      if (tabState === "History") {
+        return (
+          <HistoryPage/>
         )
       }
   }

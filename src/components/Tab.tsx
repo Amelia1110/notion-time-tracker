@@ -1,4 +1,4 @@
-import { ClockCircleOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, HistoryOutlined } from '@ant-design/icons';
 import { CalendarOutlined } from '@ant-design/icons';
 
 interface Props {
@@ -17,6 +17,11 @@ export default function Tab({tabName, onTabClick, tabState}: Props) {
         if (tabName === "Overview") {
             return (
                 <CalendarOutlined/>
+            )
+        }
+        if (tabName === "History") {
+            return (
+                <HistoryOutlined/>
             )
         }
         
