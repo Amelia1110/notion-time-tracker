@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/notion-time-tracker/static/css/main.77482616.css",
-    "main.js": "/notion-time-tracker/static/js/main.d4a0c11e.js",
+    "main.css": "/notion-time-tracker/static/css/main.14e370a3.css",
+    "main.js": "/notion-time-tracker/static/js/main.41f5549c.js",
     "static/js/787.28cb0dcd.chunk.js": "/notion-time-tracker/static/js/787.28cb0dcd.chunk.js",
     "index.html": "/notion-time-tracker/index.html",
-    "main.77482616.css.map": "/notion-time-tracker/static/css/main.77482616.css.map",
-    "main.d4a0c11e.js.map": "/notion-time-tracker/static/js/main.d4a0c11e.js.map",
+    "main.14e370a3.css.map": "/notion-time-tracker/static/css/main.14e370a3.css.map",
+    "main.41f5549c.js.map": "/notion-time-tracker/static/js/main.41f5549c.js.map",
     "787.28cb0dcd.chunk.js.map": "/notion-time-tracker/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.77482616.css",
-    "static/js/main.d4a0c11e.js"
+    "static/css/main.14e370a3.css",
+    "static/js/main.41f5549c.js"
   ]
 }
