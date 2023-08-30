@@ -1,10 +1,10 @@
-export interface Tag {
+export interface TagItem {
     name: string;
     colour: string;
 }
 
 interface tagList {
-    [key: string]: Tag;
+    [key: string]: TagItem;
 }
 
 export const tags: tagList = {
